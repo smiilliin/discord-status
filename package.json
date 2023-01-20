@@ -1,0 +1,37 @@
+{
+  "name": "discord-status",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "run": "electron .",
+    "release": "electron-builder build --win",
+    "dev": "nodemon"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/discord-rpc": "^4.0.3",
+    "electron": "^22.0.2",
+    "electron-builder": "^23.6.0",
+    "nodemon": "^2.0.20",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "build": {
+    "productName": "discord-status",
+    "directories": {
+      "output": "release/${platform}"
+    },
+    "asar": true,
+    "win": {
+      "target": "portable",
+      "icon": "icon.ico"
+    }
+  },
+  "dependencies": {
+    "discord-rpc": "^4.0.1",
+    "lit": "^2.6.1"
+  }
+}

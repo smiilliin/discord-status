@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Discord Status</title>
+    <script src="dist/render/bundle.js" async></script>
+    <style>
+      :root {
+        --firstColor: #181a1b;
+        --secondColor: #3b3b3b;
+        --thirdColor: #60686c;
+      }
+      html {
+        background-color: var(--firstColor);
+      }
+      body {
+        margin: 0;
+        display: grid;
+        width: 100vw;
+        height: 100vh;
+        grid-template-columns: 3fr 7fr;
+        grid-template-rows: 1fr 40px;
+        grid-gap: 10px;
+        color: white;
+      }
+      #activities {
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+      .activity {
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+      label {
+        display: block;
+        height: 70px;
+      }
+      .activityOption {
+        font-size: 20px;
+      }
+      .input {
+        width: 300px;
+        border-radius: 10px;
+        border: 2px solid var(--secondColor);
+        background-color: var(--secondColor);
+        color: white;
+        padding-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="activities"></div>
+    <div class="activity">
+      <label>
+        <p class="activityOption">Name</p>
+        <input type="text" class="input" id="name" />
+      </label>
+      <label>
+        <p class="activityOption">ID</p>
+        <input type="text" class="input" id="id" />
+      </label>
+      <label>
+        <p class="activityOption">Details</p>
+        <input type="text" class="input" id="details" />
+      </label>
+      <label>
+        <p class="activityOption">State</p>
+        <input type="text" class="input" id="state" />
+      </label>
+      <label>
+        <p class="activityOption">Large image key</p>
+        <input type="text" class="input" id="largeImageKey" />
+      </label>
+      <label>
+        <p class="activityOption">Large image text</p>
+        <input type="text" class="input" id="largeImageText" />
+      </label>
+      <label>
+        <p class="activityOption">Small image key</p>
+        <input type="text" class="input" id="smallImageKey" />
+      </label>
+      <label>
+        <p class="activityOption">Small image text</p>
+        <input type="text" class="input" id="smallImageText" />
+      </label>
+      <img src="svg/check.svg" height="30px" id="check" />
+      <img src="svg/plus.svg" height="30px" id="new" />
+    </div>
+    <div>
+      <img src="svg/delete.svg" height="30px" id="delete" />
+    </div>
+  </body>
+</html>
