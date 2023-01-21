@@ -149,13 +149,12 @@ import discordRPC from "discord-rpc";
   newButton.onclick = () => {
     const id = inputs.id.value;
 
-    if (id) {
+    if (id && !currentActivity) {
       const activity: IActivity = getInputActivity();
       settings.set(id, activity);
       appendActivity(inputs.name.value, id);
       window.api.saveSettings(settings);
     }
-    // console.log("hi!");
   };
   deleteButton.onclick = () => {
     if (currentActivity) {
@@ -167,16 +166,4 @@ import discordRPC from "discord-rpc";
   };
 
   customElements.define("activity-box", ActivityBox);
-
-  // window.api.saveSettings(settings);
-
-  // window.api.setPresence("1064537642718470154", {
-  //   details: ,
-  //   state: ,
-  //   startTimestamp: Date.now(),
-  //   largeImageKey: ,
-  //   largeImageText: ,
-  //   smallImageKey: ,
-  //   smallImageText: ,
-  // });
 })();
