@@ -2,6 +2,7 @@ import { app, BrowserWindow, ipcMain } from "electron";
 import path from "path";
 import discordRPC from "discord-rpc";
 import fs from "fs";
+import Settings from "./settings";
 
 app.on("ready", () => {
   const window = new BrowserWindow({
@@ -21,12 +22,7 @@ app.on("ready", () => {
 
   let isDiscordCreated = false;
 
-  const appdataPath =
-    process.env.APPDATA ||
-    (process.platform == "darwin" ? process.env.HOME + "/Library/Preferences" : process.env.HOME + "/.local/share");
-
-  const dataDir = path.join(appdataPath, "discord-status");
-  fs.mkdirSync(dataDir, { recursive: true });
+  const settings = new Settings("discord-status");
 
   ipcMain.on("clearActivity", (event, appID: string, activity: IActivity) => {
     rpc.clearActivity();
@@ -42,16 +38,14 @@ app.on("ready", () => {
   });
   ipcMain.on("loadSettings", (event) => {
     try {
-      const fileData: string = fs.readFileSync(path.join(dataDir, "settings.json")).toString();
-      const settings = JSON.parse(fileData);
-      const settingsMap = new Map(Object.entries(settings));
+      const settingsMap = new Map(Object.entries(settings.load("settings.json")));
       event.returnValue = settingsMap;
     } catch {
       event.returnValue = new Map();
     }
   });
-  ipcMain.on("saveSettings", (event, settings: Map<string, IActivity>) => {
-    fs.writeFileSync(path.join(dataDir, "settings.json"), JSON.stringify(Object.fromEntries(settings)));
+  ipcMain.on("saveSettings", (event, _settings: Map<string, IActivity>) => {
+    settings.set("settings.json", Object.fromEntries(_settings));
   });
 
   window.on("close", () => {
